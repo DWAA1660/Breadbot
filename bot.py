@@ -1,6 +1,8 @@
+from discord.ext import tasks
 from asyncio.tasks import wait_for
 from sys import prefix
 import discord
+from discord import *
 from discord import channel
 from discord import reaction
 from discord import message
@@ -9,16 +11,34 @@ from discord.ext import commands
 import random
 import requests
 import asyncio
+import datetime
+import time
 
-TOKEN = tokenhere'
+
+
+TOKEN = 'ODA4ODI1MjM3NDY2NjQ0NTAx.YCMLMw.Oz2iUxSq9SXE2Oj3smO_FBxikMQ'
 
 client = commands.Bot(command_prefix = '.')
 
+
+
+
+
 @client.event
 async def on_ready():
-	await client.change_presence(status=discord.Status.online, activity=discord.Game('Winning bot contest'))
-	print('Bot is ready.')
+    await client.change_presence(status=discord.Status.online, activity=discord.Game('Winning bot contest'))
+    print('Bot is ready.')
+    garf.start()
 	
+
+
+num = 1
+@tasks.loop(seconds = 10 )
+async def garf():
+    global num
+    channel = client.get_channel(873789547811602503)
+    await channel.send(file=discord.File(f'{num}.png'))
+    num += 1
 	
 @client.command()
 async def ping(ctx):
@@ -125,6 +145,7 @@ async def positive(ctx):
 async def wisdom(ctx):
  with open('./resources/file.txt', 'r', encoding="utf8") as file:
       await ctx.send(random.choice(file.readlines()))
+
 
 
 client.run(TOKEN)
