@@ -1,13 +1,14 @@
-from discord.ext import tasks
+from nextcord.ext import tasks
 from asyncio.tasks import wait_for
 from sys import prefix
-import discord
-from discord import *
-from discord import channel
-from discord import reaction
-from discord import message
-from discord import emoji
-from discord.ext import commands
+import nextcord
+from nextcord import *
+from nextcord import channel
+from nextcord import reaction
+from nextcord import message
+from nextcord import emoji
+from nextcord import guild
+from nextcord.ext import commands
 import random
 import requests
 import asyncio
@@ -16,7 +17,7 @@ import time
 
 
 
-TOKEN = 'tokenhere'
+TOKEN = 'ODgwNTE5MjU3MTA3MDg3MzYy.YSfddg.dl-439xq86Fdlj14XUHM0H3p5ZM'
 
 client = commands.Bot(command_prefix = '.')
 
@@ -26,20 +27,24 @@ client = commands.Bot(command_prefix = '.')
 
 @client.event
 async def on_ready():
-    await client.change_presence(status=discord.Status.online, activity=discord.Game('Winning bot contest'))
+    await client.change_presence(status=nextcord.Status.online, activity=nextcord.Game('Winning bot contest'))
     print('Bot is ready.')
     garf.start()
+
+    
 	
 
 
-num = 1
+num = 4
 @tasks.loop(seconds = 10 )
 async def garf():
     global num
     channel = client.get_channel(873789547811602503)
-    await channel.send(file=discord.File(f'{num}.png'))
+    await channel.send(file=nextcord.File(fr'C:\Users\dwatn\OneDrive\Desktop\garfffi\Breadbot\{num}.png'))
     num += 1
-	
+
+
+
 @client.command()
 async def ping(ctx):
     await ctx.send(f'Pong! {round(client.latency * 1000)} ms')	
@@ -71,15 +76,8 @@ async def clear_error(ctx, error):
         await ctx.send('Sorry you are not allowed to use this command.')
 
 
-@client.command()
-async def ban(ctx, member : discord.Member, *, reason=None):
-	if (ctx.message.author.permissions_in(ctx.message.channel).ban_members):
-		await member.ban(reason=reason)
 
-@client.command()
-async def kick(ctx, member : discord.Member, *, reason=None):
-	if (ctx.message.author.permissions_in(ctx.message.channel).kick_members):
-		await member.kick(reason=reason)
+
 
 
 @client.command()
@@ -114,7 +112,7 @@ async def kiss(ctx):
 async def cat(ctx):
     r = requests.get("https://api.thecatapi.com/v1/images/search").json()
 
-    cat_em = discord.Embed()
+    cat_em = nextcord.Embed()
     cat_em.set_image(url=f'{r[0]["url"]}')
 
     await ctx.send(embed=cat_em)
@@ -145,6 +143,11 @@ async def positive(ctx):
 async def wisdom(ctx):
  with open('./resources/file.txt', 'r', encoding="utf8") as file:
       await ctx.send(random.choice(file.readlines()))
+
+@client.command()
+async def nerd(ctx):
+
+    await ctx.send("@Anthony2be#1900 is nerd")      
 
 
 
