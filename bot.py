@@ -18,7 +18,7 @@ import os
 
 
 
-TOKEN = 'ODgwNTE5MjU3MTA3MDg3MzYy.YSfddg.cEpDi53PASS47pgNSdqhQpJbbYM'
+TOKEN = 'tokenhere'
 
 client = commands.Bot(command_prefix = '.')
 
