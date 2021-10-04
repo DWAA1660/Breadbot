@@ -75,6 +75,12 @@ class games(commands.Cog):
     @commands.command()
     async def soup(self, ctx):
         await ctx.send('SOUP')
+	
+    @commands.command()
+    async def slap(self, ctx):
+        await ctx.send('https://tenor.com/view/fish-slap-w2s-slap-funny-sidemen-gif-20599048')
+
+
 
 
 def setup(client):
