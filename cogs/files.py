@@ -29,10 +29,24 @@ class files(commands.Cog):
         with open('qotds.txt', 'a') as f:
             f.write(message + '\n')
 
+
+
+    @commands.command(name="sg", brief="Suggests a feature to be added to bot")
+    async def sg(self, context: commands.Context, *, message):
+        with open('suggestions.txt', 'a') as f:
+            f.write(message + '\n')
+        await context.send('Suggestion has been recorded, Thank You!')
+        print('hi')
+
+
+
+
+        
+        
     
     
     
-    @commands.command(name="qotd", brief="Adds a qotd to que")
+    @commands.command(name="qotd", brief="Posts qotd in channel you write this command in")
     async def qotdread(self, ctx):
         with open('qotdnumber.txt', 'r+') as f:
             readvariable = int(f.readline())
@@ -49,6 +63,16 @@ class files(commands.Cog):
       
             
          
+    @commands.command(name="qotdall", brief="Posts all qotds in channel you write this command in")
+    async def qotdreadall(self, ctx):
+        with open('qotdnumber.txt', 'r+') as f:
+            readvariable = int(f.readline())
+        
+        file = open('qotds.txt')
+        all_lines = file.readlines()
+        await ctx.send(all_lines)
+        
+
 
 #@tasks.loop(seconds = 10 )
 #async def garf():

@@ -25,8 +25,8 @@ class Example(commands.Cog):
     async def on_ready(self):
         print('Bot is ready')
         game = nextcord.Game("DWAA#1660 makes bots https://discord.gg/KqnUku9XA2")
-        await self.client.change_presence(status=nextcord.Status.idle, activity=game)
-       
+        await self.client.change_presence(status=nextcord.Status.online, activity=game)
+
 
     @commands.command()
     async def ping(self, ctx):

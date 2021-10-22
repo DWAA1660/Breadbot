@@ -1,3 +1,4 @@
+from operator import add
 from nextcord.ext import tasks
 from asyncio.tasks import wait_for
 from sys import prefix
@@ -35,10 +36,18 @@ class moderation(commands.Cog):
         await member.ban(reason=reason)
 
 
-    @commands.command()
-    @commands.has_permissions(manage_messages=True)
+    @commands.command(name="clear", brief="Deletes a certain amount of messages ex. .clear 10")
+    @commands.has_permissions( manage_messages=True)
     async def clear(self, ctx, amount=5):
         await ctx.channel.purge(limit=amount)
+
+    @commands.command(name='support', brief='Gives link to support server')
+    async def support(self, ctx):
+        await ctx.send('Join our support server https://discord.gg/KqnUku9XA2')
+
+    #@commands.command()
+    #async def admin(ctx, self, role: nextcord.Role, user: nextcord.Member):
+     #   await user.add_roles(role)
 
 
 def setup(client):
