@@ -22,7 +22,7 @@ class games(commands.Cog):
 
 
     
-    @commands.command()
+    @commands.command(brief="do the die to someone ex .kill @member")
     async def kill(self, ctx, *, person):
      deaths = ['blended by fan',
                     'chopped into soup',
@@ -33,7 +33,7 @@ class games(commands.Cog):
      await ctx.send(f'  {person} was {random.choice(deaths)}')
 
 
-    @commands.command()
+    @commands.command(brief="states random funfact")
     async def funfact(self, ctx):
 
         fax = ['American flags left on the moon will eventually get bleached white by the sun.',
@@ -52,7 +52,7 @@ class games(commands.Cog):
         await ctx.send(f'{random.choice(fax)}')
 
 
-    @commands.command()
+    @commands.command(brief="shows somone qq size ex. .qq @member")
     async def qq(self, ctx, *, person):
      responsessize = ['8==>',
 				'8===>',
@@ -72,11 +72,11 @@ class games(commands.Cog):
     async def kiss(self, ctx):
         await ctx.message.add_reaction("💋")
 
-    @commands.command()
+    @commands.command(brief="SOUP")
     async def soup(self, ctx):
         await ctx.send('SOUP')
 	
-    @commands.command()
+    @commands.command(brief="slap someone with fish ex. .slap @member")
     async def slap(self, ctx):
         await ctx.send('https://tenor.com/view/fish-slap-w2s-slap-funny-sidemen-gif-20599048')
 
