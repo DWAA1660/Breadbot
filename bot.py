@@ -17,7 +17,7 @@ import time
 import os
 
 
-TOKEN = 'ODgwNTE5MjU3MTA3MDg3MzYy.YSfddg.MMFTzHDTC_SWLetylvEnnTgr_FM'
+TOKEN = 'tokenhere'
 
 client = commands.Bot(command_prefix = '.')
 
