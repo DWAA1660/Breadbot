@@ -45,3 +45,4 @@ for filename in os.listdir('./cogs'):
 
 
 client.run(os.getenv("TOKEN")) # EDIT: Moved to secrets.
+#this uses replits env format you can also use client.run('tokenhere')
