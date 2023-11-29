@@ -4,7 +4,6 @@ from sys import prefix
 import nextcord
 
 from nextcord.ext import commands
-import random
 import requests
 import asyncio
 import datetime
@@ -16,6 +15,8 @@ from PIL import Image, ImageFilter
 import urllib
 from dadjokes import Dadjoke
 from better_profanity import profanity
+import secrets
+
 #got it working :D
 
 class games(commands.Cog):
@@ -47,8 +48,8 @@ class games(commands.Cog):
         'Has been impostered',
       ]	
         
-      dies = (f'{random.choice(deaths)}')
-      embed=nextcord.Embed(title=insults[random.randint(0, len(insults)-1)], description=person + ' was ' + dies)
+      dies = (f'{secrets.SystemRandom().choice(deaths)}')
+      embed=nextcord.Embed(title=insults[secrets.SystemRandom().randint(0, len(insults)-1)], description=person + ' was ' + dies)
       await ctx.send(embed=embed)
 
 
@@ -61,7 +62,7 @@ class games(commands.Cog):
           'go for it',
           'not my problem',
         ]
-        ans = (f'{random.choice(answers)}')
+        ans = (f'{secrets.SystemRandom().choice(answers)}')
         embed=nextcord.Embed(title=question, description=ans)
         await ctx.send(embed=embed)
 
@@ -83,7 +84,7 @@ class games(commands.Cog):
 	      'FDR’s portrait was on the dime because of his association with the March of Dimes charity.',
 	      'The sun weighs 2,000 million million million million tons.'] 
 
-      faxbutactual = (f'{random.choice(fax)}')
+      faxbutactual = (f'{secrets.SystemRandom().choice(fax)}')
       embed=nextcord.Embed(title="FunFact is:", description=faxbutactual)
       await ctx.send(embed=embed)
       
@@ -144,7 +145,7 @@ class games(commands.Cog):
             ]		    
 
 
-      res = (f'{random.choice(responsessize)}')
+      res = (f'{secrets.SystemRandom().choice(responsessize)}')
       embed=nextcord.Embed(title="qq size is:", description=person +  ' qq size is ' + res)
       await ctx.send(embed=embed)
 
