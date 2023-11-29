@@ -9,7 +9,6 @@ from nextcord import message
 from nextcord import emoji
 from nextcord import guild
 from nextcord.ext import commands
-import random
 import requests
 import asyncio
 import datetime
@@ -19,6 +18,8 @@ import json
 import io
 from PIL import Image, ImageFilter, ImageOps, ImageDraw
 import numpy as np
+import secrets
+
 #got it working :D
 
 class image(commands.Cog):
@@ -172,8 +173,8 @@ class image(commands.Cog):
 
       for x in range(0, len(pixels)):
         for y in range(0, len(pixels[x])):
-          swap_x = random.randint(0, power)
-          swap_y = random.randint(0, power)
+          swap_x = secrets.SystemRandom().randint(0, power)
+          swap_y = secrets.SystemRandom().randint(0, power)
 
           pixel_save = pixels[x][y]
           pixels[x][y] = pixels[swap_x][swap_y]
