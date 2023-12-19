@@ -88,11 +88,11 @@ class Stats(commands.Cog):
 
     @commands.command()
     async def servers(self, ctx):
-      zervers = open("saving/servers.txt", "r")
-      zervers = eval(zervers.read())
-      des = "**"
-      for x in zervers:
-        des = des + x + "\n"
+      with open("saving/servers.txt", "r") as zervers:
+        zervers = eval(zervers.read())
+        des = "**"
+        for x in zervers:
+          des = des + x + "\n"
       des = des + "**"
       embed = nextcord.Embed(title="My Servers", description=des)
       await ctx.send(embed=embed)

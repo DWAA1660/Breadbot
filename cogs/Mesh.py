@@ -24,8 +24,8 @@ class Mesh(commands.Cog):
 
     @commands.command()
     async def makemesh(self, ctx):
-      file = open("saving/mesh.txt", "r")
-      filedata = file.read()
+      with open("saving/mesh.txt", "r") as file:
+          filedata = file.read()
       filedata[str(ctx.message.author)] = []
       await ctx.send("Mesh save wiped")
 
