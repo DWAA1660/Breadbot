@@ -192,7 +192,7 @@ class games(commands.Cog):
           "top_p": 0.9,
         }
 
-        response = requests.post("http://api.vicgalle.net:5000/generate", params=payload).json()
+        response = requests.post("http://api.vicgalle.net:5000/generate", params=payload, timeout=60).json(timeout=60)
 
         temp = response['text']
         tempstring = ""
@@ -230,7 +230,7 @@ class games(commands.Cog):
     @commands.command(brief="blur gif")
     async def blurgif(self, ctx, frames, blur_per_frame):
       image = ctx.message.attachments
-      image = Image.open(requests.get(image[0], stream=True).raw)
+      image = Image.open(requests.get(image[0], stream=True, timeout=60).raw)
       gif = []
       for x in range(0, int(frames)):
         gif.append(image.filter(ImageFilter.GaussianBlur(radius=int(x)*int(blur_per_frame))))
