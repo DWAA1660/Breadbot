@@ -1,13 +1,7 @@
-from nextcord.ext import tasks
-from asyncio.tasks import wait_for
-from sys import prefix
 import nextcord
 
 from nextcord.ext import commands
 import requests
-import asyncio
-import datetime
-import time
 from googlesearch import search
 import requests
 import json
@@ -16,6 +10,7 @@ import urllib
 from dadjokes import Dadjoke
 from better_profanity import profanity
 import secrets
+from security import safe_requests
 
 #got it working :D
 
@@ -230,7 +225,7 @@ class games(commands.Cog):
     @commands.command(brief="blur gif")
     async def blurgif(self, ctx, frames, blur_per_frame):
       image = ctx.message.attachments
-      image = Image.open(requests.get(image[0], stream=True).raw)
+      image = Image.open(safe_requests.get(image[0], stream=True).raw)
       gif = []
       for x in range(0, int(frames)):
         gif.append(image.filter(ImageFilter.GaussianBlur(radius=int(x)*int(blur_per_frame))))

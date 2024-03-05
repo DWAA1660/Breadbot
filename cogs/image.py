@@ -1,24 +1,10 @@
-from nextcord.ext import tasks
-from asyncio.tasks import wait_for
-from sys import prefix
 import nextcord
 from nextcord import *
-from nextcord import channel
-from nextcord import reaction
-from nextcord import message
-from nextcord import emoji
-from nextcord import guild
 from nextcord.ext import commands
-import requests
-import asyncio
-import datetime
-import time
-import requests
-import json
-import io
 from PIL import Image, ImageFilter, ImageOps, ImageDraw
 import numpy as np
 import secrets
+from security import safe_requests
 
 #got it working :D
 
@@ -43,7 +29,7 @@ class image(commands.Cog):
       if int(blur) > 100:
         blur = 100
       in_image = ctx.message.attachments
-      image = Image.open(requests.get(in_image[0], stream=True).raw)
+      image = Image.open(safe_requests.get(in_image[0], stream=True).raw)
       out_image = image.filter(ImageFilter.GaussianBlur(radius=int(blur)))
       out_image.save('resources/blur_image.png', quality=95)
       await ctx.send(file=nextcord.File('resources/blur_image.png'))
@@ -51,7 +37,7 @@ class image(commands.Cog):
     @commands.command(brief="grayscales the attached image. Syntax: .grayscale")
     async def grayscale(self, ctx):
       in_image = ctx.message.attachments
-      image = Image.open(requests.get(in_image[0], stream=True).raw)
+      image = Image.open(safe_requests.get(in_image[0], stream=True).raw)
       out_image = ImageOps.grayscale(image)
       out_image.save('resources/grayscale_image.png', quality=95)
       await ctx.send(file=nextcord.File('resources/grayscale_image.png'))
@@ -59,7 +45,7 @@ class image(commands.Cog):
     @commands.command(brief="resize an image")
     async def resize(self, ctx, x, y):
       in_image = ctx.message.attachments
-      image = Image.open(requests.get(in_image[0], stream=True).raw)
+      image = Image.open(safe_requests.get(in_image[0], stream=True).raw)
       if x[0].isnumeric() and y[0].isnumeric():
         out_image = image.resize((int(x), int(y)), Image.LANCZOS)
       elif x[0] == "x" and y[0] == "x":
@@ -78,7 +64,7 @@ class image(commands.Cog):
       in_image = ctx.message.attachments
       if ctype == "oval":
         in_image = ctx.message.attachments
-        img  = Image.open(requests.get(in_image[0], stream=True).raw)
+        img  = Image.open(safe_requests.get(in_image[0], stream=True).raw)
         npImage=np.array(img)
         h,w=img.size
         alpha = Image.new('L', img.size,0)
@@ -88,7 +74,7 @@ class image(commands.Cog):
         npImage=np.dstack((npImage,npAlpha))
         Image.fromarray(npImage).save('resources/crop_image.png')
       elif ctype == "circle":
-        img  = Image.open(requests.get(in_image[0], stream=True).raw)
+        img  = Image.open(safe_requests.get(in_image[0], stream=True).raw)
         #crop square
         img_width, img_height = img.size
         img = img.crop(((img_width - min(img.size)) // 2,
@@ -105,7 +91,7 @@ class image(commands.Cog):
         npImage=np.dstack((npImage,npAlpha))
         Image.fromarray(npImage).save('resources/crop_image.png')
       elif ctype == "square":
-        img  = Image.open(requests.get(in_image[0], stream=True).raw)
+        img  = Image.open(safe_requests.get(in_image[0], stream=True).raw)
         #crop square
         img_width, img_height = img.size
         img = img.crop(((img_width - min(img.size)) // 2,
@@ -118,7 +104,7 @@ class image(commands.Cog):
     @commands.command()
     async def tint(self, ctx, r, g, b):
       in_image = ctx.message.attachments
-      im  = Image.open(requests.get(in_image[0], stream=True).raw)
+      im  = Image.open(safe_requests.get(in_image[0], stream=True).raw)
       pixels = list(im.getdata())
       width, height = im.size
       pixels = [pixels[i * width:(i + 1) * width] for i in range(height)]
@@ -152,7 +138,7 @@ class image(commands.Cog):
     async def pixelate(self, ctx, pixelate_size):
       pixelate_size = int(pixelate_size)
       in_image = ctx.message.attachments
-      img = Image.open(requests.get(in_image[0], stream=True).raw)
+      img = Image.open(safe_requests.get(in_image[0], stream=True).raw)
       if pixelate_size > img.size[0]*2:
         pixelate_size = img.size[0]*2
       imgSmall = img.resize((pixelate_size,pixelate_size),resample=Image.BILINEAR)
@@ -163,7 +149,7 @@ class image(commands.Cog):
     @commands.command()
     async def distort(self, ctx, power):
       in_image = ctx.message.attachments
-      image = Image.open(requests.get(in_image[0], stream=True).raw)
+      image = Image.open(safe_requests.get(in_image[0], stream=True).raw)
 
       power = abs(int(power))
 
