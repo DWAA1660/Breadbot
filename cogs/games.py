@@ -159,7 +159,7 @@ class games(commands.Cog):
 
       embed=nextcord.Embed(title=memeName, color=0x4287f5)
       embed.set_image(url=memeUrl)
-      embed.set_footer(text=f"Meme By: " + memePoster)
+      embed.set_footer(text="Meme By: " + memePoster)
       await ctx.send(embed=embed)
 
     @commands.command()
